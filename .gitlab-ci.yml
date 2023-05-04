@@ -1,0 +1,32 @@
+image: openjdk:17-jdk
+
+stages:
+  - build
+  - test
+
+before_script:
+  - echo "Start Pipeline"
+  - export GRADLE_USER_HOME=`pwd`/.gradle
+  - chmod +x ./gradlew
+
+cache:
+  paths:
+    - .gradle/wrapper
+    - .gradle/caches
+
+build:
+  stage: build
+  script:
+    - ./gradlew assemble
+
+test:
+  stage: test
+  script:
+    - ./gradlew test
+  artifacts:
+    when: always
+    reports:
+      junit: build/test-results/test/**/TEST-*.xml
+
+after_script:
+  - echo "End Pipeline"
