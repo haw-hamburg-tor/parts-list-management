@@ -1,5 +1,5 @@
 # Parts List Management
-![Build](https://github.com/haw-hamburg-tor/parts-list-management-thymeleaf/actions/workflows/build-and-test.yml/badge.svg)
+[![build-and-test](https://github.com/haw-hamburg-tor/parts-list-management/actions/workflows/build-and-test.yml/badge.svg)](https://github.com/haw-hamburg-tor/parts-list-management/actions/workflows/build-and-test.yml)
 
 This repository demonstrates tests on different levels
 as well as mocking.
