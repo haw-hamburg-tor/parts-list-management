@@ -5,3 +5,5 @@ This repository demonstrates tests on different levels
 as well as mocking.
 
 The running example is a parts lists management system.
+![](resources/partslist.png)
+![](resources/partslistobjects.png)
