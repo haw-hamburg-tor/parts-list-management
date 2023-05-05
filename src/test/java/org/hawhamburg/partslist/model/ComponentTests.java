@@ -57,7 +57,7 @@ public class ComponentTests {
         product.addPart(subProduct1, 2);
         product.addPart(subProduct2, 3);
         product.addPart(material1, 1);
-        assertEquals(105, product.fetchTotalPrice());
+        assertEquals(135, product.fetchTotalPrice());
    
 
     }

@@ -39,4 +39,8 @@ public class Product extends Component {
     public String getType() {
         return "Product";
     }
+
+    public List<Material> getParts() {
+        return null;
+    }
 }
