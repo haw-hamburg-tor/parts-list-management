@@ -9,6 +9,7 @@ import java.util.stream.Stream;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertThrows;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 
 public class ComponentTests {
 
@@ -17,7 +18,10 @@ public class ComponentTests {
      */
     @Test
     public void fetchPriceMaterial() {
-        // TODO
+
+        Material material = new Material("Material1", 100);
+        assertEquals(100, material.fetchTotalPrice().intValue());
+
     }
 
     /**
@@ -25,7 +29,14 @@ public class ComponentTests {
      */
     @Test
     public void fetchPriceProductWithTwoMaterials() throws CyclicStructureException {
-        // TODO
+
+        Material material1 = new Material("Material1", 10);
+        Material material2 = new Material("Material2", 15);
+        Product product = new Product("Product1", 0);
+        product.addPart(material1, 1);
+        product.addPart(material2, 1);
+        assertEquals(25, product.fetchTotalPrice());
+
     }
 
     /**
@@ -33,7 +44,22 @@ public class ComponentTests {
      */
     @Test
     public void fetchPriceProductWithMultipleSubProducts() throws CyclicStructureException {
-        // TODO
+
+        Material material1 = new Material("Material1", 10);
+        Material material2 = new Material("Material2", 15);
+        Product subProduct1 = new Product("SubProduct1", 0);
+        subProduct1.addPart(material1, 1);
+        subProduct1.addPart(material2, 1);
+        Product subProduct2 = new Product("SubProduct2", 0);
+        subProduct2.addPart(material1, 1);
+        subProduct2.addPart(material2, 1);
+        Product product = new Product("Product1", 0);
+        product.addPart(subProduct1, 2);
+        product.addPart(subProduct2, 3);
+        product.addPart(material1, 1);
+        assertEquals(105, product.fetchTotalPrice());
+   
+
     }
 
     @Test
@@ -68,10 +94,13 @@ public class ComponentTests {
         var m4ExpectedResult = Collections.singletonList(m4);
 
         var p4ExpectedResult = List.of(m1, m1, m4);
-        var p3ExpectedResult = Stream.of(List.of(m1, m1, m1, m2, m2, m2, m2, m2), p4ExpectedResult, p4ExpectedResult).flatMap(Collection::stream).toList();
-        var p2ExpectedResult = Stream.of(List.of(m1, m1, m1, m1, m1, m1, m1, m1, m1, m1), p4ExpectedResult, p4ExpectedResult, p4ExpectedResult).flatMap(Collection::stream).toList();
-        var p1ExpectedResult = Stream.of(p2ExpectedResult, p2ExpectedResult, p3ExpectedResult, List.of(m3, m3, m3, m3, m3)).flatMap(Collection::stream).toList();
-
+        var p3ExpectedResult = Stream.of(List.of(m1, m1, m1, m2, m2, m2, m2, m2), p4ExpectedResult, p4ExpectedResult)
+                .flatMap(Collection::stream).toList();
+        var p2ExpectedResult = Stream.of(List.of(m1, m1, m1, m1, m1, m1, m1, m1, m1, m1), p4ExpectedResult,
+                p4ExpectedResult, p4ExpectedResult).flatMap(Collection::stream).toList();
+        var p1ExpectedResult = Stream
+                .of(p2ExpectedResult, p2ExpectedResult, p3ExpectedResult, List.of(m3, m3, m3, m3, m3))
+                .flatMap(Collection::stream).toList();
 
         // Act & Assert
         assertEquals(m1ExpectedResult, m1.fetchMaterialList());
