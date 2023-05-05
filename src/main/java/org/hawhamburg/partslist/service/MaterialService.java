@@ -5,7 +5,7 @@ import org.hawhamburg.partslist.persistence.ComponentRepository;
 
 public class MaterialService {
 
-    private ComponentRepository componentRepository;
+    private final ComponentRepository componentRepository;
 
     public MaterialService(ComponentRepository componentRepository) {
         this.componentRepository = componentRepository;

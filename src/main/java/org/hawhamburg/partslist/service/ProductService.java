@@ -8,7 +8,7 @@ import java.util.List;
 
 public class ProductService {
 
-    private ComponentRepository componentRepository;
+    private final ComponentRepository componentRepository;
 
     public ProductService(ComponentRepository componentRepository) {
         this.componentRepository = componentRepository;

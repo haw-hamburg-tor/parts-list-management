@@ -7,7 +7,7 @@ import java.util.List;
 
 public class ComponentService {
 
-    private ComponentRepository componentRepository;
+    private final ComponentRepository componentRepository;
 
     public ComponentService(ComponentRepository componentRepository) {
         this.componentRepository = componentRepository;
